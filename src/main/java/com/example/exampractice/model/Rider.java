@@ -22,6 +22,8 @@ public class Rider {
 
     private String name;
 
+    private int age;
+
     private double finalTime;
 
     private int mountainPoint;
@@ -33,8 +35,9 @@ public class Rider {
     @ManyToOne(fetch = FetchType.EAGER)
     private Team team;
 
-    public Rider(String name, double finalTime, int mountainPoint, double sprintPoint, Team team) {
+    public Rider(String name, int age, double finalTime, int mountainPoint, double sprintPoint, Team team) {
         this.name = name;
+        this.age = age;
         this.finalTime = finalTime;
         this.mountainPoint = mountainPoint;
         this.sprintPoint = sprintPoint;

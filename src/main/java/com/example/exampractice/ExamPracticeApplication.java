@@ -37,15 +37,15 @@ public class ExamPracticeApplication {
             teamList.add(new Team("team john"));
             teamRepository.saveAll(teamList);
 
-            riderList.add(new Rider("zando", 15.5,12313,442323,teamList.get(0)));
-            riderList.add(new Rider("hej", 1345,12312,44343,teamList.get(1)));
-            riderList.add(new Rider("smash", 15343.5,1233232,44343,teamList.get(2)));
-            riderList.add(new Rider("vr", 15.3215,12323,44335,teamList.get(2)));
-            riderList.add(new Rider("dw", 15.3215,12323,44335,teamList.get(3)));
-            riderList.add(new Rider("dwddwqdq", 15.3215,12323,44335,teamList.get(3)));
-            riderList.add(new Rider("sazd", 15.3215,12323,44335,teamList.get(3)));
-            riderList.add(new Rider("xsqsq", 15.3215,12323,44335,teamList.get(3)));
-            riderList.add(new Rider("dw1d", 15.3215,12323,44335,teamList.get(3)));
+            riderList.add(new Rider("zando",20, 1000,12313,442323,teamList.get(0)));
+            riderList.add(new Rider("hej",30, 900,12312,44343,teamList.get(1)));
+            riderList.add(new Rider("smash",42, 800,1233232,44343,teamList.get(2)));
+            riderList.add(new Rider("vr", 19,700,12323,44335,teamList.get(2)));
+            riderList.add(new Rider("dw", 50, 600,12323,44335,teamList.get(3)));
+            riderList.add(new Rider("dwddwqdq", 50,500,12323,44335,teamList.get(3)));
+            riderList.add(new Rider("sazd", 15,400,12323,44335,teamList.get(3)));
+            riderList.add(new Rider("xsqsq", 14,300,12323,44335,teamList.get(3)));
+            riderList.add(new Rider("dw1d", 10,200,12323,44335,teamList.get(3)));
             riderRepository.saveAll(riderList);
 
         });
