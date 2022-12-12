@@ -17,5 +17,7 @@ public class TeamDto {
 
     private String teamName;
 
+
+    @JsonManagedReference
     private List<Rider> riderList;
 }

@@ -2,6 +2,7 @@ package com.example.exampractice.Dto;
 
 import com.example.exampractice.model.Rider;
 import com.example.exampractice.model.Team;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,11 @@ import javax.persistence.ManyToOne;
 public class RiderDto {
 
     private Long id;
+
     private String name;
     private int age;
+    private String country;
+
 
     private double finalTime;
 

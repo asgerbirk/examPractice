@@ -2,8 +2,10 @@ package com.example.exampractice.service;
 
 import com.example.exampractice.Dto.RiderDto;
 import com.example.exampractice.Dto.RiderMapper;
+import com.example.exampractice.Dto.TeamMapper;
 import com.example.exampractice.model.Rider;
 import com.example.exampractice.repository.RiderRepository;
+import com.example.exampractice.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -17,13 +19,18 @@ public class RiderService {
     private final RiderRepository riderRepository;
     private final RiderMapper riderMapper;
 
+
     public RiderService(RiderRepository riderRepository, RiderMapper riderMapper) {
         this.riderRepository = riderRepository;
         this.riderMapper = riderMapper;
+
     }
 
     public List<RiderDto> findAllRiders(){
-      return riderRepository.findAll().stream().map(riderMapper::riderToDto).collect(Collectors.toList());
+      return riderRepository.findAll()
+              .stream()
+              .map(riderMapper::riderToDto)
+              .collect(Collectors.toList());
     }
 
     public RiderDto findRiderById(Long id){
@@ -31,9 +38,8 @@ public class RiderService {
         return riderMapper.riderToDto(rider);
     }
 
-    public RiderDto createRider(RiderDto riderDto){
-        Rider rider = riderMapper.dtoToRider(riderDto);
-        return riderMapper.riderToDto(riderRepository.save(rider));
+    public Rider createRider(Rider rider){
+        return riderRepository.save(rider);
     }
 
     public RiderDto updateRider(Long id, RiderDto newRider){
@@ -43,6 +49,8 @@ public class RiderService {
         rider.setFinalTime(newRider.getFinalTime());
         rider.setMountainPoint(newRider.getMountainPoint());
         rider.setSprintPoint(newRider.getSprintPoint());
+        rider.setTeam(newRider.getTeam());
+       
         riderRepository.save(rider);
         return riderMapper.riderToDto(rider);
 
@@ -66,32 +74,39 @@ public class RiderService {
 
     public List<RiderDto> allSortedAfterTime(){
         List<RiderDto> allRiders = findAllRiders();
-        return allRiders.stream()
+        return allRiders
+                .stream()
                 .sorted(Comparator.comparing(RiderDto::getFinalTime).reversed())
                 .collect(Collectors.toList());
     }
     public Optional<RiderDto> yellowShirt(){
-        return findAllRiders().stream()
+        return findAllRiders()
+                .stream()
                 .max(Comparator.comparing(RiderDto::getFinalTime));
     }
 
     public Optional<RiderDto> mountainShirt(){
-        return findAllRiders().stream()
+        return findAllRiders()
+                .stream()
                 .max(Comparator.comparing(RiderDto::getMountainPoint));
     }
 
     public Optional<RiderDto> sprintShirt(){
-        return findAllRiders().stream()
+        return findAllRiders()
+                .stream()
                 .max(Comparator.comparing(RiderDto::getSprintPoint));
     }
 
     public List<RiderDto> whiteShirt(){
         List<RiderDto> allRiders = findAllRiders();
-        return allRiders.stream()
+        return allRiders
+                .stream()
                 .filter(riderDto -> riderDto.getAge() < 26)
                 .sorted(Comparator.comparing(RiderDto::getFinalTime).reversed())
                 .collect(Collectors.toList());
     }
+
+
 
 
 }

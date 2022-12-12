@@ -1,8 +1,11 @@
 package com.example.exampractice.controller;
 
 import com.example.exampractice.Dto.RiderDto;
+import com.example.exampractice.Dto.TeamDto;
 import com.example.exampractice.model.Rider;
+import com.example.exampractice.model.Team;
 import com.example.exampractice.service.RiderService;
+import com.example.exampractice.service.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +20,24 @@ import java.util.Optional;
 public class RiderController {
 
     private final RiderService riderService;
+    private final TeamService teamService;
 
-    public RiderController(RiderService riderService) {
+    public RiderController(RiderService riderService, TeamService teamService) {
         this.riderService = riderService;
+        this.teamService = teamService;
     }
 
     @GetMapping
     public ResponseEntity<List<RiderDto>> getAllRiders(){
         return ResponseEntity.ok().body(riderService.findAllRiders());
     }
+
+    @GetMapping("/teams")
+    public ResponseEntity<List<TeamDto>> getAllTeams(){
+        return ResponseEntity.ok().body(teamService.findAllTeams());
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<RiderDto> findById(@PathVariable("id") Long id){
         return ResponseEntity.ok().body(riderService.findRiderById(id));
@@ -63,8 +75,9 @@ public class RiderController {
 
 
     @PostMapping
-    public ResponseEntity<RiderDto> createRider(@Valid @RequestBody RiderDto riderDto){
-        return ResponseEntity.ok().body(riderService.createRider(riderDto));
+    public ResponseEntity<Rider> createRider(@Valid @RequestBody Rider rider){
+
+        return ResponseEntity.ok().body(riderService.createRider(rider));
     }
 
     @PutMapping ("/{id}")
